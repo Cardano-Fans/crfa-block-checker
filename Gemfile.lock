@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    blockfrost-ruby (0.1.0)
+    json (2.3.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  blockfrost-ruby
+  json
+
+BUNDLED WITH
+   2.1.4
