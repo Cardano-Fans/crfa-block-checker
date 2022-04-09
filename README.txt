@@ -3,14 +3,14 @@
 Checks if blocks have been lost due to slot battle or height battle
 
 # Install
-```
+```bash
 apt get install ruby ruby-bundler
 
 bundle install --path vendor/bundle
 ```
 
 # Run
-```
+```bash
 bundler exec ruby crfa-block-checker.rb epochs/330.json
 ```
 
