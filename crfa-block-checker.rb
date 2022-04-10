@@ -25,6 +25,7 @@ if epochSlots == 0
     exit 0
 end
 
+mintedBlocksCount = 0
 heightBattleLost = 0
 slotBattleLost = 0
 
@@ -37,6 +38,7 @@ assignedSlots.each { |item|
     status = block[:status]
 
     if status == 200
+        mintedBlocksCount += 1
         slotLeaderPoolId = block[:body][:slot_leader]
 
         if not slotLeaderPoolId == pool_id
@@ -53,11 +55,18 @@ assignedSlots.each { |item|
 
 heightBattleLostPercentage = (heightBattleLost.to_f / epochSlots)
 slotBattleLostPercentage = (slotBattleLost.to_f / epochSlots)
+performancePercentage = (mintedBlocksCount.to_f / epochSlots * 100)
 
+puts ''
 puts '----------------'
-puts '----------------'
+puts ''
 
 puts 'Summary for epochNo: ' + epochNo.to_s
+puts 'Scheduled to mint blocks: ' +  epochSlots.to_s
+puts 'Minted blocks: ' + mintedBlocksCount.to_s
+puts "Performance: #{performancePercentage.to_s} %"
+puts '----------------'
+
 puts "Height Battle Lost Count: #{ heightBattleLost}"
 puts "Slot Battle Lost Count: #{ slotBattleLost}"
 puts "Height Battle Lost Percentage: #{heightBattleLostPercentage * 100} %"
