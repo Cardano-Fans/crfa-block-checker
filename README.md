@@ -1,20 +1,21 @@
-# Introduction
+## Introduction
 
 Checks if blocks have been lost due to slot battles or height battles and provides statistics.
 
-# Install
+## Installation
 ```
 apt get install ruby ruby-bundler
-
+git clone https://github.com/Cardano-Fans/crfa-block-checker
+cd crfa-block-checker
 bundle install --path vendor/bundle
 ```
 
-# Usage
+## Usage
 ```
 bundle exec ruby crfa-block-checker.rb <path_to_leader_schedule> <pool_id>
 ```
 
-# Example run
+## Example run
 ```
 mati@hegemonek:~/Devel/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/326p.json pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3
 
@@ -33,7 +34,7 @@ Height Battle Lost Percentage: 6.0606060606060606 %
 Slot Battle Lost Percentage: 6.0606060606060606 %
 ```
 
-# KNOWN ISSUES
+# Known issues
 - cncli produces a leader schedule but for now we have to manully skip a few lines from the generated epoch file.
 
 Example command to skip headers (5 lines):
@@ -50,4 +51,4 @@ To some extend a small ca 5 or 6% of height battles (ghosted blocks) is currentl
 
 # Support / Donation
 If you find this tool useful, you can donate any amount in ADA to the following Cardano address:
-addr1qxawrd4xg72rr2f47yjxyguntgwh5xuqw4fwfnfwx0tsm0wzddeldn7syvs5x2uvuefk66azhr7lelrj423lxapuxkksn2g987
+addr1qy05muetmauqfs992qd74scaeqzejjntaass68tyecfx247zddeldn7syvs5x2uvuefk66azhr7lelrj423lxapuxkks90meng
