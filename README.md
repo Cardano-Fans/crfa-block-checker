@@ -34,7 +34,7 @@ Height Battle Lost Percentage: 6.0606060606060606 %
 Slot Battle Lost Percentage: 6.0606060606060606 %
 ```
 
-# Known issues
+## Known issues
 - cncli produces a leader schedule but for now we have to manully skip a few lines from the generated epoch file.
 
 Example command to skip headers (5 lines):
@@ -42,13 +42,13 @@ Example command to skip headers (5 lines):
 tail -n +5 320.json > 320p.json
 ```
 
-# Recommendations
+## Recommendations
 If you notice many lost height battles you can do something about it. While you don't have any control over slot battles, you have *some* control over height battles. My recommendation is to launch more relay nodes in other parts of the world, e.g. US EAST coast. If you cannot launch more relay nodes than shut down one relay node in one location and spin up in another one.
 To some extend a small ca 5 or 6% of height battles (ghosted blocks) is currently expected (April 2022). Once P2P (Peer to Peer) rolls our on Cardano things should get considerably better. This is due to the fact that there will be much more optimised algorithm to propogate blocks from the pool and propagate blocks minted by your pool.
 
-# TODO
+## TODO
 - cardano-cli format support in addition to Andrew Westberg's cncli's format
 
-# Support / Donation
+## Support / Donation
 If you find this tool useful, you can donate any amount in ADA to the following Cardano address:
 addr1qy05muetmauqfs992qd74scaeqzejjntaass68tyecfx247zddeldn7syvs5x2uvuefk66azhr7lelrj423lxapuxkks90meng
