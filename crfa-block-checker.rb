@@ -30,6 +30,9 @@ end
 heightBattleLost = 0
 slotBattleLost = 0
 
+puts "Slots allocated: #{epochSlots} for epochNo: #{epochNo}"
+
+puts "Checking..."
 assignedSlots.each { |item|
     slot = item["slot"]
     block = blockfrost.get_block_in_slot(slot)
@@ -51,10 +54,11 @@ assignedSlots.each { |item|
 heightBattleLostPercentage = (heightBattleLost.to_f / epochSlots)
 slotBattleLostPercentage = (slotBattleLost.to_f / epochSlots)
 
+puts '----------------'
+puts '----------------'
+
 puts 'Summary for epochNo: ' + epochNo.to_s
-puts '----'
 puts "Height Battle Lost Count: #{ heightBattleLost}"
 puts "Slot Battle Lost Count: #{ slotBattleLost}"
-puts '----'
 puts "Height Battle Lost Percentage: #{heightBattleLostPercentage * 100} %"
 puts "Slot Battle Lost Percentage: #{slotBattleLostPercentage * 100} %"
