@@ -6,12 +6,10 @@ if ENV['BLOCKFROST_MAINNET_KEY'] == nil
     exit -1
 end
 
-crfa_pool_id = 'pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3'
-
-
 blockfrost = Blockfrostruby::CardanoMainNet.new(ENV['BLOCKFROST_MAINNET_KEY'])
 
 input_file = ARGV[0]
+pool_id = ARGV[1]
 
 file = File.read(input_file)
 
@@ -32,7 +30,7 @@ slotBattleLost = 0
 
 puts "Slots allocated: #{epochSlots} for epochNo: #{epochNo}"
 
-puts "Checking..."
+puts "Checking slots..."
 assignedSlots.each { |item|
     slot = item["slot"]
     block = blockfrost.get_block_in_slot(slot)
@@ -41,13 +39,15 @@ assignedSlots.each { |item|
     if status == 200
         slotLeaderPoolId = block[:body][:slot_leader]
 
-        if not slotLeaderPoolId == crfa_pool_id
+        if not slotLeaderPoolId == pool_id
             slotBattleLost += 1
-            puts "SLOT_BATTLE -> block minted on slot: #{slot} by pool leader: #{slotLeaderPoolId}"
+            puts "Block minted on slot: #{slot} by pool leader: #{slotLeaderPoolId} due to a slot battle."
         end
-    elsif
+    elsif status == 404
         heightBattleLost += 1
-        puts "HEIGHT_BATTLE -> block ghosted on slot: #{slot}"
+        puts "Block ghosted on slot: #{slot} due to a height battle (ghosted)."
+    elsif 
+        puts "Unknown status: #{} for slotNo: #{slot}"
     end
 }
 

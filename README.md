@@ -1,41 +1,53 @@
 # Introduction
 
-Checks if blocks have been lost due to slot battle or height battle
+Checks if blocks have been lost due to slot battles or height battles and provides statistics.
 
 # Install
-```bash
+```
 apt get install ruby ruby-bundler
 
 bundle install --path vendor/bundle
 ```
 
-# Run
-```bash
-bundler exec ruby crfa-block-checker.rb epochs/330.json
+# Usage
+```
+bundle exec ruby crfa-block-checker.rb <path_to_leader_schedule> <pool_id>
 ```
 
 # Example run
-```bash
-mati@hegemonek:~/Devel/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/329p.json
-Slots allocated: 46 for epochNo: 329
-Checking...
-HEIGHT_BATTLE -> block ghosted on slot: 57064735
-SLOT_BATTLE -> block minted on slot: 57089597 by pool leader: pool1vdh6kxcqt9mxavyv80ggnec6jjwms44ms30rhle3lt266aj8jgh
-HEIGHT_BATTLE -> block ghosted on slot: 57189016
+```
+mati@hegemonek:~/Devel/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/326p.json pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3
+
+Slots allocated: 33 for epochNo: 326
+Checking slots...
+Block ghosted on slot: 55606470 due to a height battle (ghosted).
+Block minted on slot: 55661370 by pool leader: pool189j5mz6wa0gfrakwvn2tar7qt309qxrmsgde5v6qwm892n6re3v due to a slot battle.
+Block minted on slot: 55719658 by pool leader: pool1cx79cuquzjdm0c6xk3ace333zcq83v44p68vx7edpfufzkp8m35 due to a slot battle.
+Block ghosted on slot: 55814442 due to a height battle (ghosted).
 ----------------
 ----------------
-Summary for epochNo: 329
+Summary for epochNo: 326
 Height Battle Lost Count: 2
-Slot Battle Lost Count: 1
-Height Battle Lost Percentage: 4.3478260869565215 %
-Slot Battle Lost Percentage: 2.1739130434782608 %
+Slot Battle Lost Count: 2
+Height Battle Lost Percentage: 6.0606060606060606 %
+Slot Battle Lost Percentage: 6.0606060606060606 %
 ```
 
 # KNOWN ISSUES
-- cncli produces leaderschedule but for now we have to manully skip a few lines from the generated epoch file
+- cncli produces a leader schedule but for now we have to manully skip a few lines from the generated epoch file.
+
+Example command to skip headers (5 lines):
+```
+tail -n +5 320.json > 320p.json
+```
+
+# Recommendations
+If you notice many lost height battles you can do something about it. While you don't have any control over slot battles, you have *some* control over height battles. My recommendation is to launch more relay nodes in other parts of the world, e.g. US EAST coast. If you cannot launch more relay nodes than shut down one relay node in one location and spin up in another one.
+To some extend a small ca 5 or 6% of height battles (ghosted blocks) is currently expected (April 2022). Once P2P (Peer to Peer) rolls our on Cardano things should get considerably better. This is due to the fact that there will be much more optimised algorithm to propogate blocks from the pool and propagate blocks minted by your pool.
 
 # TODO
-- cardano-cli format support
-- testing
-- poolid configurable in the command line?
+- cardano-cli format support in addition to Andrew Westberg's cncli's format
 
+# Support / Donation
+If you find this tool useful, you can donate any amount in ADA to the following Cardano address:
+addr1qxawrd4xg72rr2f47yjxyguntgwh5xuqw4fwfnfwx0tsm0wzddeldn7syvs5x2uvuefk66azhr7lelrj423lxapuxkksn2g987
