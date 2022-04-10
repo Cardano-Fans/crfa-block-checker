@@ -45,7 +45,7 @@ assignedSlots.each { |item|
         end
     elsif status == 404
         heightBattleLost += 1
-        puts "Block ghosted on slot: #{slot} due to a height battle (ghosted)."
+        puts "Block ghosted on slot: #{slot} due to a height battle."
     elsif 
         puts "Unknown status: #{} for slotNo: #{slot}"
     end

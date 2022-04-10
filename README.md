@@ -21,10 +21,10 @@ mati@hegemonek:~/Devel/crfa-block-checker$ bundle exec ruby crfa-block-checker.r
 
 Slots allocated: 33 for epochNo: 326
 Checking slots...
-Block ghosted on slot: 55606470 due to a height battle (ghosted).
+Block ghosted on slot: 55606470 due to a height battle.
 Block minted on slot: 55661370 by pool leader: pool189j5mz6wa0gfrakwvn2tar7qt309qxrmsgde5v6qwm892n6re3v due to a slot battle.
 Block minted on slot: 55719658 by pool leader: pool1cx79cuquzjdm0c6xk3ace333zcq83v44p68vx7edpfufzkp8m35 due to a slot battle.
-Block ghosted on slot: 55814442 due to a height battle (ghosted).
+Block ghosted on slot: 55814442 due to a height battle.
 ----------------
 ----------------
 Summary for epochNo: 326
