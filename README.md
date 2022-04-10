@@ -17,21 +17,23 @@ bundle exec ruby crfa-block-checker.rb <path_to_leader_schedule> <pool_id>
 
 ## Example run
 ```
-mati@hegemonek:~/Devel/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/326p.json pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3
-
-Slots allocated: 33 for epochNo: 326
+mati@hegemonek:~/Devel/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/330p.json pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3
+Slots allocated: 39 for epochNo: 330
 Checking slots...
-Block ghosted on slot: 55606470 due to a height battle.
-Block minted on slot: 55661370 by pool leader: pool189j5mz6wa0gfrakwvn2tar7qt309qxrmsgde5v6qwm892n6re3v due to a slot battle.
-Block minted on slot: 55719658 by pool leader: pool1cx79cuquzjdm0c6xk3ace333zcq83v44p68vx7edpfufzkp8m35 due to a slot battle.
-Block ghosted on slot: 55814442 due to a height battle.
+Block minted on slot: 57483072 by pool leader: pool17jss6muzegagwnlju4t0mxsk875eu6r0uwr7mfamf2xcvrwk4tc due to a slot battle.
+Block ghosted on slot: 57579392 due to a height battle.
+
 ----------------
+
+Summary for epochNo: 330
+Scheduled to mint blocks: 39
+Minted blocks: 38
+Performance: 97.43589743589743 %
 ----------------
-Summary for epochNo: 326
-Height Battle Lost Count: 2
-Slot Battle Lost Count: 2
-Height Battle Lost Percentage: 6.0606060606060606 %
-Slot Battle Lost Percentage: 6.0606060606060606 %
+Height Battle Lost Count: 1
+Slot Battle Lost Count: 1
+Height Battle Lost Percentage: 2.564102564102564 %
+Slot Battle Lost Percentage: 2.564102564102564 %
 ```
 
 ## Known issues
