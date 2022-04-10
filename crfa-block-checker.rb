@@ -9,15 +9,26 @@ end
 crfa_pool_id = 'pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3'
 
 
-
 blockfrost = Blockfrostruby::CardanoMainNet.new(ENV['BLOCKFROST_MAINNET_KEY'])
 
 input_file = ARGV[0]
 
 file = File.read(input_file)
-data_hash = JSON.parse(file)
 
-assignedSlots = data_hash['assignedSlots']
+leaderSlotFileJson = JSON.parse(file)
+
+epochNo = leaderSlotFileJson['epoch']
+epochSlots = leaderSlotFileJson['epochSlots']
+
+assignedSlots = leaderSlotFileJson['assignedSlots']
+
+if epochSlots == 0
+    puts 'No slots allocated for epochNo:' + epochNo
+    exit 0
+end
+
+heightBattleLost = 0
+slotBattleLost = 0
 
 assignedSlots.each { |item|
     slot = item["slot"]
@@ -28,9 +39,22 @@ assignedSlots.each { |item|
         slotLeaderPoolId = block[:body][:slot_leader]
 
         if not slotLeaderPoolId == crfa_pool_id
+            slotBattleLost += 1
             puts "SLOT_BATTLE -> block minted on slot: #{slot} by pool leader: #{slotLeaderPoolId}"
         end
     elsif
+        heightBattleLost += 1
         puts "HEIGHT_BATTLE -> block ghosted on slot: #{slot}"
     end
 }
+
+heightBattleLostPercentage = (heightBattleLost.to_f / epochSlots)
+slotBattleLostPercentage = (slotBattleLost.to_f / epochSlots)
+
+puts 'Summary for epochNo: ' + epochNo.to_s
+puts '----'
+puts "Height Battle Lost Count: #{ heightBattleLost}"
+puts "Slot Battle Lost Count: #{ slotBattleLost}"
+puts '----'
+puts "Height Battle Lost Percentage: #{heightBattleLostPercentage * 100} %"
+puts "Slot Battle Lost Percentage: #{slotBattleLostPercentage * 100} %"
