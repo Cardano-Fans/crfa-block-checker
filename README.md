@@ -17,6 +17,8 @@ bundle exec ruby crfa-block-checker.rb <path_to_leader_schedule> <pool_id>
 
 ## Example run
 ```
+export BLOCKFROST_MAINNET_KEY=mainnetS6e1C6yuxQNHOX8SwVNHPvomtpxxxxxxx
+
 mati@hegemonek:~/Devel/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/330p.json pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3
 Slots allocated: 39 for epochNo: 330
 Checking slots...
