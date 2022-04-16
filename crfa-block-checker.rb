@@ -65,7 +65,7 @@ assignedSlots.each { |item|
     else
         # if we are here it means there were some blocks which are to be minted in the future
         currentlyRunningEpoch = true
-        puts "Block on slot $#{slot} at #{at} will be minted in the future."
+        puts "Block on slot #{slot} at #{at} will be minted in the future."
     end
 
 }
