@@ -6,14 +6,10 @@ if ENV['BLOCKFROST_MAINNET_KEY'] == nil
     exit -1
 end
 
-puts 'Cardano Block Checker'
-puts 'Copyright Cardano Fans (CRFA)'
-
-
 blockfrost = Blockfrostruby::CardanoMainNet.new(ENV['BLOCKFROST_MAINNET_KEY'])
 latest_slot = blockfrost.get_block_latest[:body][:slot]
 
-puts 'Latest slot:' + latest_slot.to_s
+puts 'Latest slot: ' + latest_slot.to_s
 
 input_file = ARGV[0]
 pool_id = ARGV[1]
@@ -94,3 +90,9 @@ else
     puts "Height Battle Lost Percentage: #{heightBattleLostPercentage * 100} %"
     puts "Slot Battle Lost Percentage: #{slotBattleLostPercentage * 100} %"
 end
+
+puts ''
+puts ''
+
+puts 'Cardano Block Checker'
+puts 'Copyright Cardano Fans (CRFA) (https://cardano.fans)'
