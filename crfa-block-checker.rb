@@ -81,17 +81,14 @@ puts ''
 puts 'Summary for epochNo: ' + epochNo.to_s
 puts 'Scheduled to mint blocks: ' +  epochSlots.to_s
 puts 'Minted blocks: ' + mintedBlocksCount.to_s
+puts "Height Battle Lost Count: #{heightBattleLost}"
+puts "Slot Battle Lost Count: #{slotBattleLost}"
 puts '----------------'
 
 if currentlyRunningEpoch
-    puts "Epoch #{epochNo} is still active, we will show partial performance stats:"
-    puts "Height Battle Lost Count: #{heightBattleLost}"
-    puts "Slot Battle Lost Count: #{slotBattleLost}"
+    puts "Epoch #{epochNo} is still running, some stats are available only when the epoch #{epochNo} closes."
 else
     puts "Epoch #{epochNo} already finished, showing full performance stats:"
-
-    puts "Height Battle Lost Count: #{ heightBattleLost}"
-    puts "Slot Battle Lost Count: #{ slotBattleLost}"
 
     puts "Performance: #{performancePercentage.to_s} %"
     puts "Height Battle Lost Percentage: #{heightBattleLostPercentage * 100} %"
