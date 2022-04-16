@@ -22,7 +22,7 @@ export BLOCKFROST_MAINNET_KEY=mainnetS6e1C6yuxQNHOX8SwVNHPvomtpxxxxxxx
 mati@hegemonek:~/Devel/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/332p.json pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3
 Cardano Block Checker
 Copyright Cardano Fans (CRFA)
-Latest slot:58552036
+Latest slot:58552780
 Slots allocated: 51 for epochNo: 332
 Checking if slots filled by blocks...
 Block ghosted on slot: 58075883 due to a height battle at 2022-04-11T03:56:14+02:00.
@@ -34,10 +34,10 @@ Block ghosted on slot: 58463894 due to a height battle at 2022-04-15T15:43:05+02
 Summary for epochNo: 332
 Scheduled to mint blocks: 51
 Minted blocks: 48
-----------------
-Epoch 332 already finished, showing full performance stats:
 Height Battle Lost Count: 3
 Slot Battle Lost Count: 0
+----------------
+Epoch 332 already finished, showing full performance stats:
 Performance: 94.11764705882352 %
 Height Battle Lost Percentage: 5.88235294117647 %
 Slot Battle Lost Percentage: 0.0 %
