@@ -45,12 +45,13 @@ assignedSlots.each { |item|
     status = block[:status]
     if slot < latest_slot # it makes sense to check only past slots
         if status == 200
-            mintedBlocksCount += 1
             slotLeaderPoolId = block[:body][:slot_leader]
     
             if not slotLeaderPoolId == pool_id
                 slotBattleLost += 1
                 puts "Block minted on slot: #{slot} by pool leader: #{slotLeaderPoolId} due to a slot battle at #{at}."
+            else
+              mintedBlocksCount += 1
             end
         elsif status == 404
             heightBattleLost += 1
