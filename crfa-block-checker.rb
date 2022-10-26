@@ -31,6 +31,7 @@ end
 mintedBlocksCount = 0
 heightBattleLost = 0
 slotBattleLost = 0
+stillToMint = 0
 
 # this variable represents a state which indicates if we are currently running block checker for epoch that is in progress
 currentlyRunningEpoch = false
@@ -38,6 +39,7 @@ currentlyRunningEpoch = false
 puts "Slots allocated: #{epochSlots} for epochNo: #{epochNo}"
 
 puts "Checking if slots filled by blocks..."
+
 assignedSlots.each { |item|
     slot = item["slot"]
     at = item["at"]
@@ -62,10 +64,21 @@ assignedSlots.each { |item|
     else
         # if we are here it means there were some blocks which are to be minted in the future
         currentlyRunningEpoch = true
-        puts "Block on slot #{slot} at #{at} will be minted in the future."
+        stillToMint += 1
+        #puts "Block on slot #{slot} at #{at} will be minted in the future."
     end
 
 }
+
+
+puts ''
+puts '----------------'
+puts ''
+
+
+if currentlyRunningEpoch
+  puts "#{stillToMint} still to mint in the future."
+end
 
 heightBattleLostPercentage = (heightBattleLost.to_f / epochSlots)
 slotBattleLostPercentage = (slotBattleLost.to_f / epochSlots)
