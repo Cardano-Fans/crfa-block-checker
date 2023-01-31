@@ -19,28 +19,30 @@ bundle exec ruby crfa-block-checker.rb <path_to_leader_schedule> <pool_id>
 ```
 export BLOCKFROST_MAINNET_KEY=mainnetS6e1C6yuxQNHOX8SwVNHPvomtpxxxxxxx
 
-mati@hegemonek:~/Devel/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/332p.json pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3
-Cardano Block Checker
-Copyright Cardano Fans (CRFA)
-Latest slot:58552780
-Slots allocated: 51 for epochNo: 332
+mati@hegemonek:~/Devel/OpenSource/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/390.json pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3
+Latest slot: 83549328
+Slots allocated: 27 for epochNo: 390
 Checking if slots filled by blocks...
-Block ghosted on slot: 58075883 due to a height battle at 2022-04-11T03:56:14+02:00.
-Block ghosted on slot: 58341106 due to a height battle at 2022-04-14T05:36:37+02:00.
-Block ghosted on slot: 58463894 due to a height battle at 2022-04-15T15:43:05+02:00.
 
 ----------------
 
-Summary for epochNo: 332
-Scheduled to mint blocks: 51
-Minted blocks: 48
-Height Battle Lost Count: 3
+
+----------------
+
+Summary for epochNo: 390
+Scheduled to mint blocks: 27
+Minted blocks: 27
+Height Battle Lost Count: 0
 Slot Battle Lost Count: 0
 ----------------
-Epoch 332 already finished, showing full performance stats:
-Performance: 94.11764705882352 %
-Height Battle Lost Percentage: 5.88235294117647 %
+Epoch 390 already finished, showing full performance stats:
+Performance: 100.0 %
+Height Battle Lost Percentage: 0.0 %
 Slot Battle Lost Percentage: 0.0 %
+
+
+Cardano Block Checker
+Copyright Cardano Fans (CRFA) (https://cardano.fans)
 ```
 
 ## Recommendations
