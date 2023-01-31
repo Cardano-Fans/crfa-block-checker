@@ -47,7 +47,8 @@ Copyright Cardano Fans (CRFA) (https://cardano.fans)
 
 ## Recommendations
 If you notice many lost height battles you can do something about it. While you don't have any control over slot battles, you have *some* control over height battles. My recommendation is to launch more relay nodes in other parts of the world, e.g. US EAST coast. If you cannot launch more relay nodes than shut down one relay node in one location and spin up in another one.
-To some extend a small ca 5 or 6% of height battles (ghosted blocks) is currently expected (April 2022). Once P2P (Peer to Peer) rolls our on Cardano things should get considerably better. This is due to the fact that there will be much more optimised algorithm to propogate blocks from the pool and propagate blocks minted by your pool.
+
+To some extend a small percentage (1%) of height battles (ghosted blocks) is currently expected. Once P2P (Peer to Peer) rolls our on Cardano things should get considerably better. This is due to the fact that there will be much more optimised algorithm to propogate blocks from the pool and propagate blocks minted by your pool.
 
 ## TODO
 - cardano-cli format support in addition to Andrew Westberg's cncli's format
