@@ -7,7 +7,7 @@ Checks if blocks have been lost due to slot battles or height battles and provid
 apt get install ruby ruby-bundler
 git clone https://github.com/Cardano-Fans/crfa-block-checker
 cd crfa-block-checker
-bundle install --path vendor/bundle
+bundle install
 ```
 
 ## Usage
