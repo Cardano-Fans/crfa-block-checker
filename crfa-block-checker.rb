@@ -1,5 +1,6 @@
-require 'bundler'
-require 'blockfrost-ruby'
+require 'bundler/setup'
+Bundler.require(:default) # require all bundled gems
+Dotenv.load
 
 blockfrost_project_id = ENV.fetch('BLOCKFROST_MAINNET_KEY')
 blockfrost = Blockfrostruby::CardanoMainNet.new(blockfrost_project_id)
@@ -8,7 +9,7 @@ latest_slot = blockfrost.get_block_latest[:body][:slot]
 puts 'Latest slot: ' + latest_slot.to_s
 
 input_file = ARGV[0]
-pool_id = ARGV[1]
+pool_id = ARGV[1] || ENV.fetch('POOL_ID')
 
 file = File.read(input_file)
 
@@ -44,7 +45,7 @@ assignedSlots.each { |item|
     if slot < latest_slot # it makes sense to check only past slots
         if status == 200
             slotLeaderPoolId = block[:body][:slot_leader]
-    
+
             if not slotLeaderPoolId == pool_id
                 slotBattleLost += 1
                 puts "Block minted on slot: #{slot} by pool leader: #{slotLeaderPoolId} due to a slot battle at #{at}."
@@ -54,7 +55,7 @@ assignedSlots.each { |item|
         elsif status == 404
             heightBattleLost += 1
             puts "Block ghosted on slot: #{slot} due to a height battle at #{at}."
-        elsif 
+        elsif
             puts "Unknown status: #{} for slotNo: #{slot}"
         end
     else
