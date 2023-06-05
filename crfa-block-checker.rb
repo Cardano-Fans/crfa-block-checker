@@ -1,12 +1,8 @@
 require 'bundler'
 require 'blockfrost-ruby'
 
-if ENV['BLOCKFROST_MAINNET_KEY'] == nil
-    puts 'BLOCKFROST_MAINNET_KEY env variable is missing!'
-    exit -1
-end
-
-blockfrost = Blockfrostruby::CardanoMainNet.new(ENV['BLOCKFROST_MAINNET_KEY'])
+blockfrost_project_id = ENV.fetch('BLOCKFROST_MAINNET_KEY')
+blockfrost = Blockfrostruby::CardanoMainNet.new(blockfrost_project_id)
 latest_slot = blockfrost.get_block_latest[:body][:slot]
 
 puts 'Latest slot: ' + latest_slot.to_s
