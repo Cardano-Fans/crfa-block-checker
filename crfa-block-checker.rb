@@ -4,11 +4,11 @@ Dotenv.load
 
 blockfrost_project_id = ENV.fetch('BLOCKFROST_MAINNET_KEY')
 blockfrost = Blockfrostruby::CardanoMainNet.new(blockfrost_project_id)
-latest_slot = blockfrost.get_block_latest[:body][:slot]
+latest_slot = blockfrost.get_block_latest.dig(:body, :slot)
 
 puts 'Latest slot: ' + latest_slot.to_s
 
-input_file = ARGV[0]
+input_file = ARGV[0] || Dir["./epochs/*"].sort.last
 pool_id = ARGV[1] || ENV.fetch('POOL_ID')
 
 file = File.read(input_file)
@@ -37,7 +37,7 @@ puts "Slots allocated: #{epochSlots} for epochNo: #{epochNo}"
 
 puts "Checking if slots filled by blocks..."
 
-assignedSlots.each { |item|
+assignedSlots.each do |item|
     slot = item["slot"]
     at = item["at"]
     block = blockfrost.get_block_in_slot(slot)
@@ -64,8 +64,7 @@ assignedSlots.each { |item|
         stillToMint += 1
         #puts "Block on slot #{slot} at #{at} will be minted in the future."
     end
-
-}
+end
 
 
 puts ''
