@@ -3,22 +3,43 @@
 Checks if blocks have been lost due to slot battles or height battles and provides statistics.
 
 ## Installation
+
 ```
 apt get install ruby ruby-bundler
 git clone https://github.com/Cardano-Fans/crfa-block-checker
 cd crfa-block-checker
 bundle install
+cp .env.example .env
 ```
 
+Now replace the values in .env with your values.
+
 ## Usage
+
+### Check blocks for current epoch
+
+```
+bundle exec ruby crfa-block-checker.rb
+```
+
+### Check blocks of specific epoch
+
+passing the path to the leader-schedule file as the second argument takes preference over the env variable.
+
+```
+bundle exec ruby crfa-block-checker.rb <path_to_leader_schedule>
+```
+
+### Check blocks for another pool
+
+passing the pool-id as the second argument takes preference over the env variable.
+
 ```
 bundle exec ruby crfa-block-checker.rb <path_to_leader_schedule> <pool_id>
 ```
 
 ## Example run
 ```
-export BLOCKFROST_MAINNET_KEY=mainnetS6e1C6yuxQNHOX8SwVNHPvomtpxxxxxxx
-
 mati@hegemonek:~/Devel/OpenSource/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/390.json pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3
 Latest slot: 83549328
 Slots allocated: 27 for epochNo: 390
