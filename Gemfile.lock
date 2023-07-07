@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     blockfrost-ruby (0.1.0)
+    dotenv (2.8.1)
     json (2.3.0)
 
 PLATFORMS
@@ -9,6 +10,7 @@ PLATFORMS
 
 DEPENDENCIES
   blockfrost-ruby
+  dotenv
   json
 
 BUNDLED WITH

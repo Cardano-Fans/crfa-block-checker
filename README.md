@@ -2,43 +2,72 @@
 
 Checks if blocks have been lost due to slot battles or height battles and provides statistics.
 
+Supporting files saved from `cncli leaderlogs` or `cardano-cli query leadership-schedule` and dropped into the `./epochs` folder.
+
 ## Installation
+
 ```
 apt get install ruby ruby-bundler
 git clone https://github.com/Cardano-Fans/crfa-block-checker
 cd crfa-block-checker
-bundle install --path vendor/bundle
+bundle install
+cp .env.example .env
 ```
 
+Now replace the values in .env with your values.
+
 ## Usage
+
+### Check blocks for current epoch
+
 ```
-bundle exec ruby crfa-block-checker.rb <path_to_leader_schedule> <pool_id>
+bundle exec ruby run.rb
+```
+
+### Check blocks for specific epoch
+
+passing the path to the leader-schedule file as the second argument takes precedence over the env variable.
+
+```
+bundle exec ruby run.rb <path_to_leader_schedule>
+```
+
+### Check blocks for another pool
+
+passing the pool-id as the second argument takes preference over the env variable.
+
+```
+bundle exec ruby run.rb <path_to_leader_schedule> <pool_id>
 ```
 
 ## Example run
 ```
-export BLOCKFROST_MAINNET_KEY=mainnetS6e1C6yuxQNHOX8SwVNHPvomtpxxxxxxx
+$ bundle exec ruby run.rb ./epochs/416.json
 
-mati@hegemonek:~/Devel/OpenSource/crfa-block-checker$ bundle exec ruby crfa-block-checker.rb epochs/390.json pool1d3gckjrphwytzw2uavgkxskwe08msumzsfj4lxnpcnpks3zjml3
-Latest slot: 83549328
-Slots allocated: 27 for epochNo: 390
-Checking if slots filled by blocks...
+EPOCH 416 SUMMARY
+----------------------
+Assigned slots to mint blocks: 14
+Minted blocks: 12
+Lost height battles: 1
+Lost slot battles: 1
 
-----------------
+
+LOST SLOT BATTLES
+----------------------
+- Block minted on slot 94419032 by pool pool1yl9plldxt500xfkfu6n3wggvnzcs5rshjyxq4dkea6m0kt7qg9v at 2023-06-05 17:15:23 UTC
 
 
-----------------
+LOST HEIGHT BATTLES
+----------------------
+- Block ghosted on slot 94348935 at 2023-06-04 21:47:06 UTC
 
-Summary for epochNo: 390
-Scheduled to mint blocks: 27
-Minted blocks: 27
-Height Battle Lost Count: 0
-Slot Battle Lost Count: 0
-----------------
-Epoch 390 already finished, showing full performance stats:
-Performance: 100.0 %
-Height Battle Lost Percentage: 0.0 %
-Slot Battle Lost Percentage: 0.0 %
+
+PERFORMANCE STATS
+----------------------
+Minted blocks: 85.71%
+Lost height battles: 7.14%
+Lost slot battles: 7.14%
+
 
 
 Cardano Block Checker
