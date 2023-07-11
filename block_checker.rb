@@ -1,4 +1,5 @@
 require 'time'
+require 'yaml'
 require 'bundler/setup'
 Bundler.require(:default) # require all bundled gems
 Dotenv.load
@@ -122,5 +123,52 @@ class BlockChecker
     performance[:minted_blocks] = (minted_blocks.size.to_f / past_assigned_slots_count * 100).round(2)
     performance[:lost_height_battles] = (lost_height_battles.size.to_f / past_assigned_slots_count * 100).round(2)
     performance[:lost_slot_battles] = (lost_slot_battles.size.to_f / past_assigned_slots_count * 100).round(2)
+  end
+
+  def contributers
+    YAML.load(File.open("./contributers.yml"))
+  end
+
+  def summary_output
+    if assigned_slots_count < 1
+      "No slots allocated for epoch #{epoch_no}"
+    else
+      [
+        "Assigned slots to mint blocks: #{assigned_slots_count.to_s}",
+        "Minted blocks: #{minted_blocks.size.to_s}",
+        "Lost height battles: #{lost_height_battles.size}",
+        "Lost slot battles: #{lost_slot_battles.size}"
+      ].join("\n")
+    end
+  end
+
+  def future_mints_output
+    future_mints.map do |slot, slot_time|
+      "- #{slot_time.strftime('%d of %B, %Y')}"
+    end.join("\n")
+  end
+
+  def lost_slot_battles_output
+    lost_slot_battles.map do |slot, extra|
+      "- Block minted on slot #{slot} by pool #{extra[0]} at #{extra[1]}"
+    end.join("\n")
+  end
+
+  def lost_height_battles_output
+    lost_height_battles.map do |slot, slot_time|
+      "- Block ghosted on slot #{slot} at #{slot_time}"
+    end.join("\n")
+  end
+
+  def unknown_block_status_output
+    unknown_block_status.map do |slot, slot_time|
+      "- Slot #{slot} at #{slot_time}"
+    end.join("\n")
+  end
+
+  def performance_stats_output
+    performance.map do |perf, value|
+      "#{perf.to_s.gsub!(/_/, ' ').gsub(/^\w/) { $&.upcase }}: #{value}%"
+    end.join("\n")
   end
 end
