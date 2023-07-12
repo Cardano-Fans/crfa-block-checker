@@ -1,3 +1,4 @@
 vendor
 octave-workspace
 epochs/*
+.env

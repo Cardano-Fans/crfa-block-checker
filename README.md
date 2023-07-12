@@ -6,6 +6,7 @@ The script reads leaderlogs for an epoch and generates a report including minted
 
 * Simple plain text report in the terminal
 * Markdown report to Discord server
+* Markdown report to Telegram Group
 * Leader schedule saved from `cncli leaderlogs` output
 * Leader schedule saved from `cardano-cli query leadership-schedule` output
 
@@ -50,6 +51,12 @@ bundle exec ruby run.rb ./epochs/416.json pool1cpr59c88ps8499gtgegr3muhclr7dln35
 In Discord `Edit Channel -> Integrations -> Webhooks` you'll need to create a new webhook and use the URL for the env variable `DISCORD_WEBHOOK_URL` in your `.env` file.
 
 Then you can run `bundle exec ruby discord_report.rb` the same way as described above.
+
+### Report to Telegram
+
+Setup a Telegram Bot using [BotFather](https://t.me/botfather) to obtain the required API token and get the Chat-ID of your Group by inviting @RawDataBot into your Group. Store both values in `.env`.
+
+Then you can run `bundle exec ruby telegram_report.rb` the same way as described above.
 
 ## Examples
 
