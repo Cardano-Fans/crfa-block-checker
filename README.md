@@ -27,7 +27,7 @@ Now replace the values in `.env` with your own values.
 ### Check blocks using latest leader schedule
 
 ```
-bundle exec ruby run.rb
+script/report-blocks stdout
 ```
 
 ### Check blocks for specific epoch
@@ -35,7 +35,7 @@ bundle exec ruby run.rb
 by passing the epoch number (name of the leader-schedule file)
 
 ```
-bundle exec ruby run.rb --epoch=416
+script/report-blocks stdout --epoch=416
 ```
 
 ### Check blocks for another pool
@@ -43,25 +43,25 @@ bundle exec ruby run.rb --epoch=416
 passing pool-id takes precedence over the `POOL_ID` env variable.
 
 ```
-bundle exec ruby run.rb --pool-id=pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
+script/report-blocks stdout --pool-id=pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
 ```
 
 ### Report to Discord
 
 In Discord `Edit Channel -> Integrations -> Webhooks` you'll need to create a new webhook and use the URL for the env variable `DISCORD_WEBHOOK_URL` in your `.env` file.
 
-Then you can run `bundle exec ruby discord_report.rb` the same way as described above.
+Then you can run `script/report-blocks discord` the same way as described above.
 
 ### Report to Telegram
 
 Setup a Telegram Bot using [BotFather](https://t.me/botfather) to obtain the required API token and get the Chat-ID of your Group by inviting @RawDataBot into your Group. Store both values in `.env`.
 
-Then you can run `bundle exec ruby telegram_report.rb` the same way as described above.
+Then you can run `script/report-blocks telegram` the same way as described above.
 
 ## Examples
 
 ```
-$ bundle exec ruby run.rb -e 416
+$ script/report-blocks stdout -e 416
 
 EPOCH 416 SUMMARY
 ----------------------
