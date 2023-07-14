@@ -1,7 +1,11 @@
 require 'time'
 require 'yaml'
+require 'optparse'
+require 'ostruct'
+
 require 'bundler/setup'
 Bundler.require(:default) # require all bundled gems
+
 Dotenv.load
 
 class BlockChecker
@@ -29,12 +33,33 @@ class BlockChecker
     build_data
   end
 
+  def options
+    return @options if @options
+
+    @options = OpenStruct.new
+
+    OptionParser.new do |opt|
+      opt.on('e', '--epoch=412') { |o| @options.epoch = o }
+      opt.on('p', '--pool-id=xyz') { |o| @options.poolid = o }
+    end.parse!
+
+    @options
+  end
+
   def input_file
-    @input_file ||= File.open(ARGV[0] || Dir["./epochs/*"].sort.last)
+    return @input_file if @input_file
+
+    if options.epoch
+      path = Dir["./epochs/#{options.epoch}*"].last
+    else
+      path = Dir["./epochs/*"].sort.last
+    end
+
+    @input_file = File.open(path.to_s)
   end
 
   def pool_id
-    @pool_id ||= ARGV[1] || ENV.fetch('POOL_ID')
+    @pool_id ||= options.poolid || ENV.fetch('POOL_ID')
   end
 
   def epoch_no

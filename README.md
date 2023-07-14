@@ -32,18 +32,18 @@ bundle exec ruby run.rb
 
 ### Check blocks for specific epoch
 
-by passing the path to the leader-schedule file as the first argument
+by passing the epoch number (name of the leader-schedule file)
 
 ```
-bundle exec ruby run.rb ./epochs/416.json
+bundle exec ruby run.rb --epoch=416
 ```
 
 ### Check blocks for another pool
 
-passing the pool-id as the second argument takes precedence over the `POOL_ID` env variable.
+passing pool-id takes precedence over the `POOL_ID` env variable.
 
 ```
-bundle exec ruby run.rb ./epochs/416.json pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
+bundle exec ruby run.rb --pool-id=pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
 ```
 
 ### Report to Discord
@@ -61,7 +61,7 @@ Then you can run `bundle exec ruby telegram_report.rb` the same way as described
 ## Examples
 
 ```
-$ bundle exec ruby run.rb ./epochs/416.json
+$ bundle exec ruby run.rb -e 416
 
 EPOCH 416 SUMMARY
 ----------------------
