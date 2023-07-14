@@ -1,4 +1,4 @@
-require_relative "block_checker"
+require_relative "../block_checker"
 
 discord_webhook_url = ENV.fetch("DISCORD_WEBHOOK_URL")
 discord_client = Discordrb::Webhooks::Client.new(url: discord_webhook_url)

@@ -1,4 +1,4 @@
-require_relative "block_checker"
+require_relative "../block_checker"
 
 bc = BlockChecker.new
 
