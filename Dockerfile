@@ -9,4 +9,4 @@ FROM base
 WORKDIR /block-checker
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY . ./
-ENTRYPOINT ["./script/block_checker"]
+ENTRYPOINT ["./script/report-blocks"]

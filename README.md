@@ -12,6 +12,14 @@ The script reads leaderlogs for an epoch and generates a report including minted
 
 ## Installation
 
+### Docker
+
+```
+docker pull lacepool/cardano-block-checker
+```
+
+### Local
+
 ```
 apt get install ruby ruby-bundler
 git clone https://github.com/Cardano-Fans/crfa-block-checker
@@ -57,6 +65,38 @@ Then you can run `script/report-blocks discord` the same way as described above.
 Setup a Telegram Bot using [BotFather](https://t.me/botfather) to obtain the required API token and get the Chat-ID of your Group by inviting @RawDataBot into your Group. Store both values in `.env`.
 
 Then you can run `script/report-blocks telegram` the same way as described above.
+
+### With Docker
+
+Report to stdout
+
+```
+docker run --rm \
+        -v /path/to/leaderlogs:/block-checker/epochs \
+        -e BLOCKFROST_MAINNET_KEY=xxx \
+        lacepool/cardano-block-checker:latest stdout --epoch 416 --pool-id pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
+```
+
+Report to Discord
+
+```
+docker run --rm \
+        -v /path/to/leaderlogs:/block-checker/epochs \
+        -e BLOCKFROST_MAINNET_KEY=xxx \
+        -e DISCORDISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/... \
+        lacepool/cardano-block-checker:latest discord --epoch 416 --pool-id pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
+```
+
+Report to Telegram
+
+```
+docker run --rm \
+        -v /path/to/leaderlogs:/block-checker/epochs \
+        -e BLOCKFROST_MAINNET_KEY=xxx \
+        -e TELEGRAM_API_TOKEN=xxx \
+        -e TELEGRAM_CHAT_ID=-1234 \
+        lacepool/cardano-block-checker:latest telegram --epoch 416 --pool-id pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
+```
 
 ## Examples
 
