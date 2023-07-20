@@ -7,6 +7,7 @@ The script reads leaderlogs for an epoch and generates a report including minted
 * Simple plain text report in the terminal
 * Markdown report to Discord server
 * Markdown report to Telegram Group
+* Simple and short plain text report to Twitter
 * Leader schedule saved from `cncli leaderlogs` output
 * Leader schedule saved from `cardano-cli query leadership-schedule` output
 
@@ -66,6 +67,20 @@ Setup a Telegram Bot using [BotFather](https://t.me/botfather) to obtain the req
 
 Then you can run `script/report-blocks telegram` the same way as described above.
 
+### Report to Twitter
+
+First you need to set up a twitter developer app and grant rights for tweeting from your twitter account. This is required only once (one-off task).
+
+1. Sign in to Twitter's developer portal at https://developer.twitter.com
+2. Create a new project and app
+3. Store the OAuth 2.0 Client ID and Client Secret as `TWITTER_CLIENT_ID` and `TWITTER_CLIENT_SECRET` in your `.env` file
+4. Run `bundle exec ruby twitter/authorize_oneoff.rb`. It prints a link and prompts you to enter a code. When opening the link you’ll want your browser to be already authenticated into your twitter account.
+5. Click authorize and wait for being redirected.
+6. Copy the `code` query string parameter value from the URL
+7. Paste the code into your shell
+
+Now you're all set. Run `script/report-blocks twitter --epoch 416` for tweeting a summary and performance report from your twitter account.
+
 ### With Docker
 
 Report to stdout
@@ -96,6 +111,29 @@ docker run --rm \
         -e TELEGRAM_API_TOKEN=xxx \
         -e TELEGRAM_CHAT_ID=-1234 \
         lacepool/cardano-block-checker:latest telegram --epoch 416 --pool-id pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
+```
+
+Report to Twitter
+
+Follow the twitter set up instructions #1 and #2. Then you start the container and expose ClientID and ClientSecret and overwrite the entrypoint to enter a shell. Inside the container you continue the instructions from #4. To not add a database dependency the twitter auth credentials are stored in the file system. Therefore, you need to mount a volume to persist marshalled objects of the oauth client and the twitter token response. It can be any folder on your local machine. See the following example.
+
+```
+docker run -it \
+    -v /path/to/twitter/dumps:/block-checker/helpers/twitter/dumps \
+    -e TWITTER_CLIENT_ID=xxx \
+    -e TWITTER_CLIENT_SECRET=xxx \
+    --entrypoint /bin/sh \
+    lacepool/cardano-block-checker:latest
+```
+
+Once you finished the authorization process you can tweet your block report using docker
+
+```
+docker run --rm \
+    -v /path/to/leaderlogs:/block-checker/epochs \
+    -v /path/to/twitter/dumps:/block-checker/helpers/twitter/dumps \
+    -e BLOCKFROST_MAINNET_KEY=xxx \
+    lacepool/cardano-block-checker:latest twitter -e 416 --pool-id pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
 ```
 
 ## Examples

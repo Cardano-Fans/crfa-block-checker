@@ -2,3 +2,4 @@ vendor
 octave-workspace
 epochs/*
 .env
+twitter/dumps
