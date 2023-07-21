@@ -1,0 +1,3 @@
+o:TwitterOAuth2::Client:@identifierI"'UXNmV2VrMjJxb2RERHhMRF9HY1A6MTpjaQ:ET:@secretI"7zZZ-2wWg5wzZfxWwzgt20gJFNDkFsfdLWv_mZcEhhBmMXEQKoc;T:@private_key0:@certificate0:@redirect_uriI"'https://localhost/twitter/callback;T:@scheme0:
+@hostI"api.twitter.com;T:
+@port0:@authorization_endpointI"+https://twitter.com/i/oauth2/authorize;T:@token_endpointI"/2/oauth2/token;T:@revocation_endpoint0:@granto:.Rack::OAuth2::Client::Grant::RefreshToken:@refresh_tokenI"`NmhuQTM2NHRPbVdyOWlEeklEU2VNWEowRzBJeTRPelJJMFBZNDBzdWtHYkVFOjE2ODk0MTc4Njg3MDc6MToxOnJ0OjE;T:@stateI"63OvJMJQBY_FwzyQxhBd6A;F:@code_verifierI"0bnf2VcSQ50T8gECY4N4PvGi64LK-g9akN1pkleNleYQ;F:@code_challengeI"0ZibcvyKyw38R_PrYKtcUMzEi4BV1Y_WvITKjJmN3DUQ;F:@code_challenge_method:	s256

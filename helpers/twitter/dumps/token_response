@@ -1,0 +1,3 @@
+o:&Rack::OAuth2::AccessToken::Bearer:@access_tokenI"`Q0NncERnUFc3LUt6bjZxakdYVXp4cnBhNEN5UmcwR1RhZTJaT0l3dUFpNVR4OjE2ODk4NTc3MjMxNDE6MTowOmF0OjE:ET:@token_type:bearer:@refresh_tokenI"`aDFWZEkyaU5WdVY1b3BId2k1b3NzWGZhWi1QNWdWbzFNbkpITFJYVlpaejZJOjE2ODk4NTc3MjMxNDE6MTowOnJ0OjE;T:@expires_ini :@scopeI"5tweet.write users.read tweet.read offline.access;T:@raw_attributesC:-ActiveSupport::HashWithIndifferentAccess{
+I"token_type;TI"bearer;TI"expires_in;Ti I"access_token;T@I"
+scope;T@I"refresh_token;T@

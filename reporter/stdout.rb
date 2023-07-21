@@ -1,19 +1,11 @@
-require_relative "block_checker"
+require_relative "../block_checker"
 
 bc = BlockChecker.new
 
-if bc.assigned_slots_count < 1
-  puts "No slots allocated for epoch #{bc.epoch_no}"
-  exit 0
-end
-
-puts %Q(
+puts %Q(\n
 EPOCH #{bc.epoch_no} SUMMARY
 ----------------------
-Assigned slots to mint blocks: #{bc.assigned_slots_count.to_s}
-Minted blocks: #{bc.minted_blocks.size.to_s}
-Lost height battles: #{bc.lost_height_battles.size}
-Lost slot battles: #{bc.lost_slot_battles.size}
+#{bc.summary_output}
 )
 
 puts %Q(\n
@@ -35,17 +27,13 @@ end.join("\n")}
 puts %Q(\n
 LOST HEIGHT BATTLES
 ----------------------
-#{bc.lost_height_battles.map do |slot, slot_time|
-   "- Block ghosted on slot #{slot} at #{slot_time}"
-end.join("\n")}
+#{bc.lost_height_battles_output}
 ) if bc.lost_height_battles.any?
 
 puts %Q(\n
 UNKNOWN BLOCK STATUS
 ----------------------
-#{bc.unknown_block_status.map do |slot, slot_time|
-  puts "slot #{slot} at #{slot_time}"
-end.join("\n")}
+#{bc.unknown_block_status_output}
 ) if bc.unknown_block_status.any?
 
 puts %Q(\n
@@ -60,7 +48,10 @@ bc.performance.each do |perf, value|
   puts "#{perf.to_s.gsub!(/_/, ' ').gsub(/^\w/) { $&.upcase }}: #{value}%"
 end
 
-puts %Q(\n\n
-Cardano Block Checker
-Copyright Cardano Fans (CRFA) (https://cardano.fans)
+puts %Q(\n
+DEVELOPED BY
+----------------------
+#{bc.contributers.map do |ticker, url|
+  [ticker, url].join(" ")
+end.join("\n")}
 )

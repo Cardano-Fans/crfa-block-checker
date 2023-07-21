@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -f "reporter/$1.rb" ]
+  then
+    bundle exec ruby reporter/$1.rb $@
+else
+  echo "Please pass a valid reporter name as first argument. Available reporters are stdout, discord, telegram"
+fi
