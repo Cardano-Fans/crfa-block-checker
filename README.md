@@ -4,14 +4,13 @@ The script reads leaderlogs for an epoch and generates a report including minted
 
 ## Features
 
-* Simple plain text report in the terminal
+* Simple plain text report to stdout (default)
 * Markdown report to Discord server
 * Markdown report to Telegram Group
 * Simple and short plain text report to Twitter
-* Leader schedule saved from `cncli leaderlogs` output
-* Leader schedule saved from `cardano-cli query leadership-schedule` output
+* Leader schedule saved from `cncli leaderlogs` or `cardano-cli query leadership-schedule` output
 
-## Installation
+## Installation & Setup
 
 ### Docker
 
@@ -26,14 +25,19 @@ apt get install ruby ruby-bundler
 git clone https://github.com/Cardano-Fans/crfa-block-checker
 cd crfa-block-checker
 bundle install
+```
+
+Copy `.env.example` and replace the values needed depending on the reporters you want to use.
+
+```
 cp .env.example .env
 ```
 
-Now replace the values in `.env` with your own values.
-
 ## Usage
 
-### Check blocks using latest leader schedule
+Drop a leader schedule file from cncli or cardano-cli in the `./epochs` folder and make sure to name the file after the epoch number (e.g. `416.json` or `416.txt`).
+
+### Check blocks using latest leader schedule file
 
 ```
 script/report-blocks stdout
