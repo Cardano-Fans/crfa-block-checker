@@ -4,14 +4,13 @@ The script reads leaderlogs for an epoch and generates a report including minted
 
 ## Features
 
-* Simple plain text report in the terminal
+* Simple plain text report to stdout (default)
 * Markdown report to Discord server
 * Markdown report to Telegram Group
 * Simple and short plain text report to Twitter
-* Leader schedule saved from `cncli leaderlogs` output
-* Leader schedule saved from `cardano-cli query leadership-schedule` output
+* Leader schedule saved from `cncli leaderlogs` or `cardano-cli query leadership-schedule` output
 
-## Installation
+## Installation & Setup
 
 ### Docker
 
@@ -26,46 +25,57 @@ apt get install ruby ruby-bundler
 git clone https://github.com/Cardano-Fans/crfa-block-checker
 cd crfa-block-checker
 bundle install
+```
+
+Copy `.env.example` and replace the values needed depending on the reporters you want to use.
+
+```
 cp .env.example .env
 ```
 
-Now replace the values in `.env` with your own values.
-
 ## Usage
 
-### Check blocks using latest leader schedule
+Drop a leader schedule file from cncli or cardano-cli in the `./epochs` folder and make sure to name the file after the epoch number (e.g. `416.json` or `416.txt`).
+
+Running `script/report-blocks` without any arguments prints a report for your latest available epoch to stdout.
+
+The first argument passed to the script defines the reporter. Passing `--help` shows other available options.
+
+### Report specific epoch
+
+Pass the epoch number (name of the leader-schedule file)
 
 ```
-script/report-blocks stdout
+script/report-blocks --epoch=416
 ```
 
-### Check blocks for specific epoch
+### Report for another pool
 
-by passing the epoch number (name of the leader-schedule file)
-
-```
-script/report-blocks stdout --epoch=416
-```
-
-### Check blocks for another pool
-
-passing pool-id takes precedence over the `POOL_ID` env variable.
+`--pool-id` takes precedence over the `POOL_ID` env variable.
 
 ```
-script/report-blocks stdout --pool-id=pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
+script/report-blocks --pool-id=pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
 ```
 
 ### Report to Discord
 
 In Discord `Edit Channel -> Integrations -> Webhooks` you'll need to create a new webhook and use the URL for the env variable `DISCORD_WEBHOOK_URL` in your `.env` file.
 
-Then you can run `script/report-blocks discord` the same way as described above.
+```
+script/report-blocks discord
+```
+
+You can pass the same options as described above or pass `--help` for all available options.
 
 ### Report to Telegram
 
 Setup a Telegram Bot using [BotFather](https://t.me/botfather) to obtain the required API token and get the Chat-ID of your Group by inviting @RawDataBot into your Group. Store both values in `.env`.
 
-Then you can run `script/report-blocks telegram` the same way as described above.
+```
+script/report-blocks telegram
+```
+
+You can pass the same options as described above or pass `--help` for all available options.
 
 ### Report to Twitter
 
@@ -79,7 +89,11 @@ First you need to set up a twitter developer app and grant rights for tweeting f
 6. Copy the `code` query string parameter value from the URL
 7. Paste the code into your shell
 
-Now you're all set. Run `script/report-blocks twitter --epoch 416` for tweeting a summary and performance report from your twitter account.
+Now you can send reports from your twitter account.
+
+```
+script/report-blocks twitter
+```
 
 ### With Docker
 
@@ -89,7 +103,7 @@ Report to stdout
 docker run --rm \
         -v /path/to/leaderlogs:/block-checker/epochs \
         -e BLOCKFROST_MAINNET_KEY=xxx \
-        lacepool/cardano-block-checker:latest stdout --epoch 416 --pool-id pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
+        lacepool/cardano-block-checker:latest --epoch 416 --pool-id pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
 ```
 
 Report to Discord
@@ -136,10 +150,10 @@ docker run --rm \
     lacepool/cardano-block-checker:latest twitter -e 416 --pool-id pool1cpr59c88ps8499gtgegr3muhclr7dln35g9a3rqmv4dkxg9n3h8
 ```
 
-## Examples
+## Example reports
 
 ```
-$ script/report-blocks stdout -e 416
+$ script/report-blocks -e 416
 
 EPOCH 416 SUMMARY
 ----------------------
@@ -166,9 +180,10 @@ Lost height battles: 7.14%
 Lost slot battles: 7.14%
 
 
-
-Cardano Block Checker
-Copyright Cardano Fans (CRFA) (https://cardano.fans)
+DEVELOPED BY
+----------------------
+CRFA https://cardano.fans
+LACE https://lacepool.com
 ```
 
 ## Recommendations
